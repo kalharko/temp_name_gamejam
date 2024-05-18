@@ -26,6 +26,19 @@ public class GameManager : MonoBehaviour
     private List<List<List<string>>> rules;
 
 
+    public static GameManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,6 +126,11 @@ public class GameManager : MonoBehaviour
     {
         // TODO : Implementer
         return "";
+    }
+    
+    public List<List<List<string>>> GetRules()
+    {
+        return rules;
     }
 
     // TODO : Fonction qui retourne les images associées à une règle
