@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "temp_name_gamejam.sln"
+    "dotnet.defaultSolution": "temp_name_gamejam2.sln"
 }
