@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.Splines;
 
 public class SushiBehavior : MonoBehaviour
 {
+    // Référence aux assets d'assiettes
+    public 
 
     // Référence à la spline
     private SplineContainer spline;
@@ -41,5 +44,7 @@ public class SushiBehavior : MonoBehaviour
     }
 
     void SelectApearance() {
-        // TODO
+        // TODO: Récuperer la liste de règles du game manager
+        // List<List<string>> rules = GameManager.GetRules();
     }
+}

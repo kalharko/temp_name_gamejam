@@ -99,7 +99,12 @@ public class BeltBehavior : MonoBehaviour
         }
     }
 
-    public IEnumerator StartPunishSpeedUp()
+    public void StartPunishSpeedUp()
+    {
+        StartCoroutine(PunishSpeedUp());
+    }
+
+    private IEnumerator PunishSpeedUp()
     {
         // get all childrens of spline_gameObject
         SetSushiSpeed(beltSpeed + punishSpeedUp);
