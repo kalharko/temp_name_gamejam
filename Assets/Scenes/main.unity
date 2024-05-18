@@ -214,9 +214,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de74e83baca9c4478eda186f24d72fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  belt: {fileID: 0}
-  tables: {fileID: 0}
   initialHealth: 3
+  sprite_plates:
+  - {fileID: 21300000, guid: bf51562df01a6f949ba4803ed8ef72e7, type: 3}
+  - {fileID: 21300000, guid: 22c02693ffffd964a967fc87b5fe03db, type: 3}
+  - {fileID: 21300000, guid: 3452023b4e530364c9ff1d36ee5d04b4, type: 3}
+  sprite_fillings:
+  - {fileID: 21300000, guid: 12797281308239d448c92e99d3484646, type: 3}
+  - {fileID: 21300000, guid: defb1b34372f218419f421dae5ea5f2c, type: 3}
+  - {fileID: 21300000, guid: c5968c1a5c843e841a22f3615b433c6e, type: 3}
+  sprite_toppings:
+  - {fileID: 21300000, guid: d9d67235ebe9a564c853432da4f47757, type: 3}
+  - {fileID: 21300000, guid: 55f4db7a4c527cc48937ce6420cb0828, type: 3}
+  - {fileID: 21300000, guid: 977c3a6120700cf4d87acdba3d3bd835, type: 3}
 --- !u!4 &93846756
 Transform:
   m_ObjectHideFlags: 0

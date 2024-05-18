@@ -8,17 +8,10 @@ public class GameManager : MonoBehaviour
     // Nombre de points de vie initial
     [SerializeField] private int initialHealth = 3;
 
-    // Noms des attributs
-    [SerializeField] private List<string> plates;
-    [SerializeField] private List<string> filling;
-    [SerializeField] private List<string> decorations;
-
-    // Nombre d'assiettes
-    [SerializeField] private int nb_Plates = 3;
-    // Nombre de sushi
-    [SerializeField] private int nb_Sushi = 3;
-    // Nombre de décorations
-    [SerializeField] private int nb_Decorations = 3;
+    // Référence aux assets du sushi
+    [SerializeField] public List<Sprite> sprite_plates;
+    [SerializeField] public List<Sprite> sprite_fillings;
+    [SerializeField] public List<Sprite> sprite_toppings;
 
     // Variables du jeu
     // Nombre de points de vie actuel
@@ -44,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         rules = new List<List<List<string>>>();
         // rules.Add(new List<List<string>>{new List<string>{"square"}, new List<string>{}, new List<string>{}});
-        rules.Add(new List<List<string>> { new() { "square" }, new() { }, new() { } });
+        rules.Add(new List<List<string>> { new() { sprite_plates[0].name }, new() { }, new() { } });
 
     }
 
@@ -75,17 +68,17 @@ public class GameManager : MonoBehaviour
             if (random_number < 0.33)
             {
                 // add a constraint to the first list
-                new_rule[0].Add(plates[Random.Range(0, plates.Count)]);
+                new_rule[0].Add(sprite_plates[Random.Range(0, sprite_plates.Count)].name);
             }
             else if (random_number < 0.66)
             {
                 // add a constraint to the second list
-                new_rule[1].Add(filling[Random.Range(0, filling.Count)]);
+                new_rule[1].Add(sprite_fillings[Random.Range(0, sprite_fillings.Count)].name);
             }
             else
             {
                 // add a constraint to the third list
-                new_rule[2].Add(decorations[Random.Range(0, decorations.Count)]);
+                new_rule[2].Add(sprite_toppings[Random.Range(0, sprite_toppings.Count)].name);
             }
         }
     }

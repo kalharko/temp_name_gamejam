@@ -10,11 +10,6 @@ using UnityEngine.Splines;
 public class SushiBehavior : MonoBehaviour
 {
     // référence aux assets du sushi
-    [SerializeField] private List<Sprite> sprite_plates;
-    [SerializeField] private List<Sprite> sprite_fillings;
-    [SerializeField] private List<Sprite> sprite_toppings;
-
-    // référence aux assets du sushi
     [SerializeField] private SpriteRenderer plate;
     [SerializeField] private SpriteRenderer filling;
     [SerializeField] private SpriteRenderer topping;
@@ -77,7 +72,20 @@ public class SushiBehavior : MonoBehaviour
 
         // select a random appearance
         string plate = possible_plates[Random.Range(0, possible_plates.Count)];
-        string filling = possible_fillings[Random.Range(0, possible_fillings.Count)];
+
+        string filling;
+        if (possible_fillings.Count == 0)
+        {
+            List<Sprite> sprite_fillings = GameManager.Instance.sprite_fillings;
+            filling = sprite_fillings[Random.Range(0, sprite_fillings.Count)].name;
+        } else {
+            filling = possible_fillings[Random.Range(0, possible_fillings.Count)];
+        }
+
+        if (possible_topping.Count == 0)
+        {
+            possible_topping.Add("rien");
+        }
         string topping = possible_topping[Random.Range(0, possible_topping.Count)];
 
         // store the appearance
@@ -86,5 +94,14 @@ public class SushiBehavior : MonoBehaviour
 
     void ApplyAppearance() {
 
+        // get the sprite lists from the game manager
+        List<Sprite> sprite_plates = GameManager.Instance.sprite_plates;
+        List<Sprite> sprite_fillings = GameManager.Instance.sprite_fillings;
+        List<Sprite> sprite_toppings = GameManager.Instance.sprite_toppings;
+
+        // set the sprites
+        plate.sprite = sprite_plates.Find(sprite => sprite.name == appearance[0]);
+        filling.sprite = sprite_fillings.Find(sprite => sprite.name == appearance[1]);
+        topping.sprite = sprite_toppings.Find(sprite => sprite.name == appearance[2]);
     }
 }
