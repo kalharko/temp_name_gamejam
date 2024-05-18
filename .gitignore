@@ -26,8 +26,9 @@
 # Visual Studio cache directory
 .vs/
 
-# Ignore vs config
+# Ignore ide config
 .vscode/
+.idea/
 
 # Gradle cache directory
 .gradle/

@@ -23,7 +23,22 @@ public class GameManager : MonoBehaviour
     // Nombre de points de vie actuel
     private int health;
 
+    public GameObject DraggedSushi { get; set; } = null;
+    public bool IsInRange { get; set; }
+    
+    public static GameManager Instance { get; private set; }
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+    
     // Start is called before the first frame update
     void Start()
     {

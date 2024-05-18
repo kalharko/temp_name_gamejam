@@ -36,7 +36,7 @@ public class SushiBehavior : MonoBehaviour
         }
     }
 
-    void StopFollowingSpline()
+    public void StopFollowingSpline()
     {
         following_spline = false;
     }
