@@ -41,9 +41,11 @@ public class BeltBehavior : MonoBehaviour
     [SerializeField] private GameObject belt;
      public SpriteRenderer spriteRenderer;
     public Sprite sprite1;
-    public Sprite sprite2;        
-    // Intervalle entre les changements de sprites
-    public float interval = 1.0f;          
+    public Sprite sprite2; 
+    public Sprite sprite3;
+    public Sprite sprite4;       
+    public Sprite sprite5;
+    public Sprite sprite6;   
     
     // Start is called before the first frame update
     void Start()
@@ -135,9 +137,17 @@ public class BeltBehavior : MonoBehaviour
         while (true)
         {
             spriteRenderer.sprite = sprite1;
-            yield return new WaitForSeconds(interval);
+            yield return new WaitForSeconds(beltSpeed);
             spriteRenderer.sprite = sprite2;
-            yield return new WaitForSeconds(interval);
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite3;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite4;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite5;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite6;
+            yield return new WaitForSeconds(beltSpeed);
         }
     }
 
