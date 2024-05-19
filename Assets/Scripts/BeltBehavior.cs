@@ -35,6 +35,17 @@ public class BeltBehavior : MonoBehaviour
     // Reference vers l'enfant spline
     private SplineContainer spline;
 
+    // Variables pour l'animation 
+
+    [SerializeField] private GameObject belt;
+     public SpriteRenderer spriteRenderer;
+    public Sprite sprite1;
+    public Sprite sprite2; 
+    public Sprite sprite3;
+    public Sprite sprite4;       
+    public Sprite sprite5;
+    public Sprite sprite6;   
+    
     private void Awake()
     {
         GameManager.OnGameStateChanged += OnGameStateChanged;
@@ -56,6 +67,11 @@ public class BeltBehavior : MonoBehaviour
         timeSinceLastAcceleration = 0.0f;
         timeSinceLastSpawnAcceleration = 0.0f;
         timeSinceLastSpawn = 0.0f;
+
+        // On récupère le sprite renderer de la belt
+        
+        spriteRenderer = belt.GetComponent<SpriteRenderer>();
+        StartCoroutine(SwitchSprites());
     }
 
     // Update is called once per frame
@@ -131,6 +147,25 @@ public class BeltBehavior : MonoBehaviour
 
         // call EndPunishSpeedUp
         SetSushiSpeed(beltSpeed);
+    }
+
+    IEnumerator SwitchSprites()
+    {
+        while (true)
+        {
+            spriteRenderer.sprite = sprite1;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite2;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite3;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite4;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite5;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite6;
+            yield return new WaitForSeconds(beltSpeed);
+        }
     }
 
 }
