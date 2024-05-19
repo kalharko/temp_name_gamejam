@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     // Paramètres du jeu
     // Nombre de points de vie initial
     [SerializeField] private int initialHealth = 3;
+    [SerializeField] float slowdownDuration = 2f;
+    [SerializeField] private GameObject gameOverScreen;
 
     // Référence aux assets du sushi
     [SerializeField] public List<Sprite> sprite_plates;
@@ -60,10 +62,34 @@ public class GameManager : MonoBehaviour
                 HandleFailedState();
                 break;
             case GameState.IsGameOver:
+                HandleGameOverState();
                 break;
         }
         
         OnGameStateChanged?.Invoke(state);
+    }
+
+    private void HandleGameOverState()
+    {
+        StartCoroutine(SlowTimeUntilGameOver());
+    }
+
+    private IEnumerator SlowTimeUntilGameOver()
+    {
+        float startTime = Time.realtimeSinceStartup;
+        float startScale = Time.timeScale;
+
+        while (Time.timeScale > 0)
+        {
+            float elapsed = Time.realtimeSinceStartup - startTime;
+            Time.timeScale = Mathf.Lerp(startScale, 0, elapsed / slowdownDuration);
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
+            yield return null;
+        }
+
+        Time.timeScale = 0;
+        gameOverScreen.SetActive(true);
     }
 
     private void HandleSucceededState()
@@ -99,6 +125,12 @@ public class GameManager : MonoBehaviour
         rules = new List<List<List<string>>>();
         AddFirstRule();
         AddRule();
+
+        // Init game data;
+        Health = initialHealth;
+        Score = 0;
+        
+        UpdateGameState(GameState.IsPlaying);
     }
 
     // Update is called once per frame
@@ -218,6 +250,21 @@ public class GameManager : MonoBehaviour
             }
         }
         return true;
+    }
+
+    public void IncrementScore(int value)
+    {
+        Score += value;
+    }
+
+    public void RemoveLifePoints(int value)
+    {
+        Health -= value;
+
+        if (Health <= 0)
+        {
+            UpdateGameState(GameState.IsGameOver);
+        }
     }
 
     public List<List<string>> GetRuleAtIndex(int index)
