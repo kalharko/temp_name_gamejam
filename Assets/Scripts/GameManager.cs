@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     // Nombre de points de vie initial
     [SerializeField] private int initialHealth = 3;
     [SerializeField] float slowdownDuration = 2f;
-    [SerializeField] private GameObject gameOverScreen;
 
     // Référence aux assets du sushi
     [SerializeField] public List<Sprite> sprite_plates;
@@ -89,7 +88,6 @@ public class GameManager : MonoBehaviour
         }
 
         Time.timeScale = 0;
-        gameOverScreen.SetActive(true);
     }
 
     private void HandleSucceededState()
