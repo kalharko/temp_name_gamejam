@@ -51,7 +51,6 @@ public class BeltBehavior : MonoBehaviour
         // On récupère la référence vers l'enfant spline
         spline = spline_gameObject.GetComponent<SplineContainer>();
         // print(spline);
-        Debug.Log(spline);
 
         // On initialise les temps écoulés
         timeSinceLastAcceleration = 0.0f;

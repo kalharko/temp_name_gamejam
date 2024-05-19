@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
         rules = new List<List<List<string>>>();
         // rules.Add(new List<List<string>>{new List<string>{"square"}, new List<string>{}, new List<string>{}});
         rules.Add(new List<List<string>> { new() { sprite_plates[0].name }, new() { }, new() { } });
-
+        AddRule();
     }
 
     // Update is called once per frame
@@ -117,6 +117,8 @@ public class GameManager : MonoBehaviour
         // for i in range(index_of_new_rule):
         List<List<string>> new_rule = new List<List<string>> { new() { }, new() { }, new() { } };
 
+        string randomDraw;
+        
         for (int i = 0; i <= index_of_new_rule; i++)
         {
             // get a random number between 0 and 1
@@ -124,19 +126,27 @@ public class GameManager : MonoBehaviour
             if (random_number < 0.33)
             {
                 // add a constraint to the first list
-                new_rule[0].Add(sprite_plates[Random.Range(0, sprite_plates.Count)].name);
+                randomDraw = sprite_plates[Random.Range(0, sprite_plates.Count)].name;
+                new_rule[0].Add(randomDraw);
+                
             }
             else if (random_number < 0.66)
             {
                 // add a constraint to the second list
-                new_rule[1].Add(sprite_fillings[Random.Range(0, sprite_fillings.Count)].name);
+                randomDraw = sprite_fillings[Random.Range(0, sprite_fillings.Count)].name;
+                new_rule[1].Add(randomDraw);
             }
             else
             {
                 // add a constraint to the third list
-                new_rule[2].Add(sprite_toppings[Random.Range(0, sprite_toppings.Count)].name);
+                randomDraw = sprite_toppings[Random.Range(0, sprite_toppings.Count)].name;
+                new_rule[2].Add(randomDraw);
             }
+            
+            Debug.Log(randomDraw);
         }
+        
+        rules.Add(new_rule);
     }
 
     public bool CheckSushiAgainstRule(List<string> sushi, int rule_index)

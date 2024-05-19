@@ -24,6 +24,7 @@ public class SushiBehavior : MonoBehaviour
     private float positionOnSpline = 0.0f;
     private bool following_spline = true;
     private List<string> appearance;
+    public List<string> Appearance => appearance;
 
     // Start is called before the first frame update
     void Start()
