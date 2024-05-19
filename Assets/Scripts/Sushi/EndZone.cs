@@ -10,12 +10,20 @@ public class EndZone : MonoBehaviour
         {
             return;
         }
-
+        
         List<string> conditions = collision.GetComponentInParent<SushiBehavior>().Appearance;
             
         if (GameManager.Instance.CheckSushiAgainstRule(conditions, id))
         {
-            
+            GameManager.Instance.IncrementScore(1);
+            Debug.Log("Score : " + GameManager.Instance.Score);
         }
+        else
+        {
+            GameManager.Instance.RemoveLifePoints(1);
+            Debug.Log("Vie : " + GameManager.Instance.Health);
+        }
+        
+        Destroy(collision.gameObject);
     }
 }
