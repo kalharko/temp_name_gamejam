@@ -40,14 +40,17 @@ public class DragDrop : MonoBehaviour
 
     public void OnMouseUp()
     {
-        if (!GameManager.Instance.IsInRange)
+        if (!GameManager.Instance.IsSushiValid)
         {
+            GameManager.Instance.Health--;
             StartCoroutine(ReturnToAnchorPoint());
             return;
         }
-        
+
+        GameManager.Instance.Score++;
         StopMovingSushi();
-        GameManager.Instance.IsInRange = false;
+        GameManager.Instance.IsSushiInRange = false;
+        GameManager.Instance.IsSushiValid = false;
     }
 
     private void StopMovingSushi()

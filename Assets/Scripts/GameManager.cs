@@ -22,9 +22,25 @@ public class GameManager : MonoBehaviour
     // Variables du jeu
     // Nombre de points de vie actuel
     private int health;
+    private int score;
 
     public GameObject DraggedSushi { get; set; } = null;
-    public bool IsInRange { get; set; }
+    public bool IsSushiInRange { get; set; }
+    public bool IsSushiValid { get; set; }
+    
+    public int Health { get; set; }
+
+    public int Score
+    {
+        get => score;
+        set
+        {
+            if (value > 0)
+            {
+                score = value;
+            }
+        }
+    }
     
     public static GameManager Instance { get; private set; }
 
