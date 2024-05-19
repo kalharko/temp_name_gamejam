@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -45,13 +44,22 @@ public class BeltBehavior : MonoBehaviour
     // Intervalle entre les changements de sprites
     public float interval = 1.0f;          
     
+    private void Awake()
+    {
+        GameManager.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= OnGameStateChanged;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         // On récupère la référence vers l'enfant spline
         spline = spline_gameObject.GetComponent<SplineContainer>();
         // print(spline);
-        Debug.Log(spline);
 
         // On initialise les temps écoulés
         timeSinceLastAcceleration = 0.0f;
@@ -99,6 +107,15 @@ public class BeltBehavior : MonoBehaviour
             // On lui donne la vitesse de la belt
             sushi.GetComponent<SushiBehavior>().speed = beltSpeed;
             timeSinceLastSpawn = 0.0f;
+        }
+    }
+
+    private void OnGameStateChanged(GameState state)
+    {
+        if (state == GameState.HasFailed)
+        {
+            StartPunishSpeedUp();
+            GameManager.Instance.UpdateGameState(GameState.IsPlaying);
         }
     }
 

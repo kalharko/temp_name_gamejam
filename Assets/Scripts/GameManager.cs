@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,8 +39,44 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public static event Action<GameState> OnGameStateChanged;
+    public GameState state;
     
     public static GameManager Instance { get; private set; }
+
+    public void UpdateGameState(GameState newState)
+    {
+        state = newState;
+        
+        switch (newState)
+        {
+            case GameState.IsPlaying:
+                break;
+            case GameState.HasSucceeded:
+                HandleSucceededState();
+                break;
+            case GameState.HasFailed:
+                HandleFailedState();
+                break;
+            case GameState.IsGameOver:
+                break;
+        }
+        
+        OnGameStateChanged?.Invoke(state);
+    }
+
+    private void HandleSucceededState()
+    {
+        Score++;
+        IsSushiInRange = false;
+        IsSushiValid = false;
+    }
+
+    private void HandleFailedState()
+    {
+        
+    }
 
     private void Awake()
     {
@@ -54,15 +93,33 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         rules = new List<List<List<string>>>();
-        // rules.Add(new List<List<string>>{new List<string>{"square"}, new List<string>{}, new List<string>{}});
-        rules.Add(new List<List<string>> { new() { sprite_plates[0].name }, new() { }, new() { } });
-
+        AddFirstRule();
+        AddRule();
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    public void AddFirstRule()
+    {
+        List<List<string>> new_rule = new List<List<string>> { new() {}, new() { }, new() { } };
+        int random_index;
+        // Add random plate
+        new_rule[0].Add(sprite_plates[Random.Range(0, sprite_plates.Count)].name);
+        // Add 2 random fillings
+        random_index = Random.Range(0, sprite_fillings.Count);
+        new_rule[1].Add(sprite_fillings[random_index].name);
+        while (sprite_fillings[random_index].name == new_rule[1][0]) {
+            random_index = Random.Range(0, sprite_fillings.Count);
+        }
+        new_rule[1].Add(sprite_fillings[random_index].name);
+        // Add 1 random topping
+        new_rule[2].Add(sprite_toppings[Random.Range(0, sprite_toppings.Count)].name);
+        
+        rules.Add(new_rule);
     }
 
     public void AddRule()
@@ -76,9 +133,32 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        // get sprites already used in rules
+        List<string> used_plates = new List<string>();
+        List<string> used_fillings = new List<string>();
+        List<string> used_toppings = new List<string>();
+
+        foreach (List<List<string>> rule in rules)
+        {
+            foreach (string plate in rule[0])
+            {
+                used_plates.Add(plate);
+            }
+            foreach (string filling in rule[1])
+            {
+                used_fillings.Add(filling);
+            }
+            foreach (string topping in rule[2])
+            {
+                used_toppings.Add(topping);
+            }
+        }
+
         // for i in range(index_of_new_rule):
         List<List<string>> new_rule = new List<List<string>> { new() { }, new() { }, new() { } };
 
+        string randomDraw;
+        
         for (int i = 0; i <= index_of_new_rule; i++)
         {
             // get a random number between 0 and 1
@@ -86,19 +166,27 @@ public class GameManager : MonoBehaviour
             if (random_number < 0.33)
             {
                 // add a constraint to the first list
-                new_rule[0].Add(sprite_plates[Random.Range(0, sprite_plates.Count)].name);
+                randomDraw = sprite_plates[Random.Range(0, sprite_plates.Count)].name;
+                new_rule[0].Add(randomDraw);
+                
             }
             else if (random_number < 0.66)
             {
                 // add a constraint to the second list
-                new_rule[1].Add(sprite_fillings[Random.Range(0, sprite_fillings.Count)].name);
+                randomDraw = sprite_fillings[Random.Range(0, sprite_fillings.Count)].name;
+                new_rule[1].Add(randomDraw);
             }
             else
             {
                 // add a constraint to the third list
-                new_rule[2].Add(sprite_toppings[Random.Range(0, sprite_toppings.Count)].name);
+                randomDraw = sprite_toppings[Random.Range(0, sprite_toppings.Count)].name;
+                new_rule[2].Add(randomDraw);
             }
+            
+            Debug.Log(randomDraw);
         }
+        
+        rules.Add(new_rule);
     }
 
     public bool CheckSushiAgainstRule(List<string> sushi, int rule_index)
@@ -145,4 +233,12 @@ public class GameManager : MonoBehaviour
     }
 
     // TODO : Fonction qui retourne les images associées à une règle
+    
+}
+public enum GameState
+{
+    IsPlaying,
+    HasFailed,
+    HasSucceeded,
+    IsGameOver
 }

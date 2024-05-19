@@ -42,18 +42,13 @@ public class DragDrop : MonoBehaviour
     {
         if (!GameManager.Instance.IsSushiValid)
         {
-            /* TODO
-             *
-             * Ajouter la punition de la belt
-             */
+            GameManager.Instance.UpdateGameState(GameState.HasFailed);
             StartCoroutine(ReturnToAnchorPoint());
             return;
         }
 
-        GameManager.Instance.Score++;
         StopMovingSushi();
-        GameManager.Instance.IsSushiInRange = false;
-        GameManager.Instance.IsSushiValid = false;
+        GameManager.Instance.UpdateGameState(GameState.HasSucceeded);
     }
 
     private void StopMovingSushi()
