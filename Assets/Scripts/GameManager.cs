@@ -68,7 +68,11 @@ public class GameManager : MonoBehaviour
 
     private void HandleSucceededState()
     {
+        // Hide plate content and increment score
+        DraggedSushi.GetComponentInParent<SushiBehavior>().HidePlateContent();
         Score++;
+        
+        // Reset dragged sushi data
         IsSushiInRange = false;
         IsSushiValid = false;
     }

@@ -30,6 +30,8 @@ public class DragDrop : MonoBehaviour
     }
     public void OnMouseDown() {
         _dragOffset = transform.position - GetMousePosition();
+        
+        // Store the dragged sushi instance
         GameManager.Instance.DraggedSushi = gameObject;
     }
 

@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using UnityEngine.Splines;
 using Random = UnityEngine.Random;
@@ -27,16 +21,6 @@ public class SushiBehavior : MonoBehaviour
     private bool following_spline = true;
     private List<string> appearance;
     public List<string> Appearance => appearance;
-
-    private void Awake()
-    {
-        GameManager.OnGameStateChanged += OnGameStateChanged;
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.OnGameStateChanged -= OnGameStateChanged;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -62,13 +46,10 @@ public class SushiBehavior : MonoBehaviour
         }
     }
 
-    private void OnGameStateChanged(GameState state)
+    public void HidePlateContent()
     {
-        if (state == GameState.HasSucceeded)
-        {
-            filling.enabled = false;
-            topping.enabled = false;
-        }
+        filling.enabled = false;
+        topping.enabled = false;
     }
 
     public void StopFollowingSpline()
