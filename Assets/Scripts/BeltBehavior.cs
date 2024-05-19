@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -36,18 +35,43 @@ public class BeltBehavior : MonoBehaviour
     // Reference vers l'enfant spline
     private SplineContainer spline;
 
+    // Variables pour l'animation 
+
+    [SerializeField] private GameObject belt;
+     public SpriteRenderer spriteRenderer;
+    public Sprite sprite1;
+    public Sprite sprite2; 
+    public Sprite sprite3;
+    public Sprite sprite4;       
+    public Sprite sprite5;
+    public Sprite sprite6;   
+    
+    private void Awake()
+    {
+        GameManager.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= OnGameStateChanged;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         // On récupère la référence vers l'enfant spline
         spline = spline_gameObject.GetComponent<SplineContainer>();
         // print(spline);
-        Debug.Log(spline);
 
         // On initialise les temps écoulés
         timeSinceLastAcceleration = 0.0f;
         timeSinceLastSpawnAcceleration = 0.0f;
         timeSinceLastSpawn = 0.0f;
+
+        // On récupère le sprite renderer de la belt
+        
+        spriteRenderer = belt.GetComponent<SpriteRenderer>();
+        StartCoroutine(SwitchSprites());
     }
 
     // Update is called once per frame
@@ -88,6 +112,15 @@ public class BeltBehavior : MonoBehaviour
         }
     }
 
+    private void OnGameStateChanged(GameState state)
+    {
+        if (state == GameState.HasFailed)
+        {
+            StartPunishSpeedUp();
+            GameManager.Instance.UpdateGameState(GameState.IsPlaying);
+        }
+    }
+
     private void SetSushiSpeed(float new_speed)
     {
         // get all childrens of spline_gameObject
@@ -114,6 +147,25 @@ public class BeltBehavior : MonoBehaviour
 
         // call EndPunishSpeedUp
         SetSushiSpeed(beltSpeed);
+    }
+
+    IEnumerator SwitchSprites()
+    {
+        while (true)
+        {
+            spriteRenderer.sprite = sprite1;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite2;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite3;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite4;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite5;
+            yield return new WaitForSeconds(beltSpeed);
+            spriteRenderer.sprite = sprite6;
+            yield return new WaitForSeconds(beltSpeed);
+        }
     }
 
 }

@@ -30,6 +30,7 @@ public class DragDrop : MonoBehaviour
     }
     public void OnMouseDown() {
         _dragOffset = transform.position - GetMousePosition();
+        GameManager.Instance.DraggedSushi = gameObject;
     }
 
     public void OnMouseDrag() {
@@ -39,7 +40,21 @@ public class DragDrop : MonoBehaviour
 
     public void OnMouseUp()
     {
-        StartCoroutine(ReturnToAnchorPoint());
+        if (!GameManager.Instance.IsSushiValid)
+        {
+            GameManager.Instance.UpdateGameState(GameState.HasFailed);
+            StartCoroutine(ReturnToAnchorPoint());
+            return;
+        }
+
+        StopMovingSushi();
+        GameManager.Instance.UpdateGameState(GameState.HasSucceeded);
+    }
+
+    private void StopMovingSushi()
+    {
+        // _anchorPoint.position = transform.position;
+        _anchorPoint.GetComponent<SushiBehavior>().StopFollowingSpline();
     }
 
    public void OnZoneCollided()
@@ -56,7 +71,7 @@ public class DragDrop : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, _anchorPoint.position,_returnSpeed * Time.deltaTime);
             distance = Vector3.Distance(transform.position, _anchorPoint.position);
-            print(distance);
+            // print(distance);
             yield return new WaitForSeconds(0.0005f);
         }
         transform.position = _anchorPoint.position;
