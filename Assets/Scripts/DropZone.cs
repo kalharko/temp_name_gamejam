@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
 public class DropZone : MonoBehaviour
 {
