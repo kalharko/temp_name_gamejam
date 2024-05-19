@@ -24,6 +24,8 @@ public class TableBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Ajouter le temps écoulé depuis la dernière règle
+        timeSinceLastRule += Time.deltaTime;
         // Si le temps depuis la dernière règle est supérieur à l'intervalle de temps
         if (timeSinceLastRule > newRuleInterval)
         {
