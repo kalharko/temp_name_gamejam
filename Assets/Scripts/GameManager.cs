@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     // Variables du jeu
     // Nombre de points de vie actuel
     private int health;
-    private List<List<List<string>>> rules;
+    public List<List<List<string>>> rules;
 
     private int score;
 
