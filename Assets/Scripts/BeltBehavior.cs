@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -35,6 +34,16 @@ public class BeltBehavior : MonoBehaviour
 
     // Reference vers l'enfant spline
     private SplineContainer spline;
+
+    private void Awake()
+    {
+        GameManager.OnGameStateChanged += OnGameStateChanged;
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.OnGameStateChanged -= OnGameStateChanged;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -85,6 +94,15 @@ public class BeltBehavior : MonoBehaviour
             // On lui donne la vitesse de la belt
             sushi.GetComponent<SushiBehavior>().speed = beltSpeed;
             timeSinceLastSpawn = 0.0f;
+        }
+    }
+
+    private void OnGameStateChanged(GameState state)
+    {
+        if (state == GameState.HasFailed)
+        {
+            StartPunishSpeedUp();
+            GameManager.Instance.UpdateGameState(GameState.IsPlaying);
         }
     }
 

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,8 +38,44 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    public static event Action<GameState> OnGameStateChanged;
+    public GameState state;
     
     public static GameManager Instance { get; private set; }
+
+    public void UpdateGameState(GameState newState)
+    {
+        state = newState;
+        
+        switch (newState)
+        {
+            case GameState.IsPlaying:
+                break;
+            case GameState.HasSucceeded:
+                HandleSucceededState();
+                break;
+            case GameState.HasFailed:
+                HandleFailedState();
+                break;
+            case GameState.IsGameOver:
+                break;
+        }
+        
+        OnGameStateChanged?.Invoke(state);
+    }
+
+    private void HandleSucceededState()
+    {
+        Score++;
+        IsSushiInRange = false;
+        IsSushiValid = false;
+    }
+
+    private void HandleFailedState()
+    {
+        
+    }
 
     private void Awake()
     {
@@ -145,4 +183,12 @@ public class GameManager : MonoBehaviour
     }
 
     // TODO : Fonction qui retourne les images associées à une règle
+    
+}
+public enum GameState
+{
+    IsPlaying,
+    HasFailed,
+    HasSucceeded,
+    IsGameOver
 }
