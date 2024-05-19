@@ -42,7 +42,10 @@ public class DragDrop : MonoBehaviour
     {
         if (!GameManager.Instance.IsSushiValid)
         {
-            GameManager.Instance.Health--;
+            /* TODO
+             *
+             * Ajouter la punition de la belt
+             */
             StartCoroutine(ReturnToAnchorPoint());
             return;
         }
