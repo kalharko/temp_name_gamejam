@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PopUpBehavior : MonoBehaviour
 {
@@ -13,13 +14,13 @@ public class PopUpBehavior : MonoBehaviour
     [SerializeField] private List<GameObject> arrows;
 
     // title
-    [SerializeField] private GameObject title;
+    [SerializeField] private TMP_Text title;
 
     // description
-    [SerializeField] private GameObject description;
+    [SerializeField] private TMP_Text description;
 
     // flavor text
-    [SerializeField] private GameObject flavorText;
+    [SerializeField] private TMP_Text flavorText;
 
     // PopUp Screen
     [SerializeField] private GameObject popUpScreen;
@@ -36,7 +37,20 @@ public class PopUpBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Hide all elements
+        popUpScreen.SetActive(false);
+        title.text = "";
+        description.text = "";
+        flavorText.text = "";
+        ruleImage.EraseRuleImage();
+        foreach (GameObject arrow in arrows)
+        {
+            arrow.SetActive(false);
+        }
+        foreach (GameObject zone in zones)
+        {
+            zone.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -50,11 +64,11 @@ public class PopUpBehavior : MonoBehaviour
         popUpScreen.SetActive(true);
         arrows[table_index].SetActive(true);
         zones[table_index].SetActive(true);
-        title.SetActive(true);
+        title.text = "Nouvelle commande !";
 
         // set flavor text
         flavorText.transform.gameObject.SetActive(true);
-        flavorText.GetComponent<Text>().text = flavorTextOptions[Random.Range(0, flavorTextOptions.Count)];
+        flavorText.text = flavorTextOptions[Random.Range(0, flavorTextOptions.Count)];
 
         // set description
         List<List<string>> rule = GameManager.Instance.GetRuleAtIndex(table_index + 1);

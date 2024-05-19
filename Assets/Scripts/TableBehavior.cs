@@ -19,6 +19,12 @@ public class TableBehavior : MonoBehaviour
     void Start()
     {
         timeSinceLastRule = newRuleInterval - 1.0f;
+
+        // Hide all tables
+        foreach (GameObject table in tables)
+        {
+            table.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -29,17 +35,16 @@ public class TableBehavior : MonoBehaviour
         // Si le temps depuis la dernière règle est supérieur à l'intervalle de temps
         if (timeSinceLastRule > newRuleInterval)
         {
-            // Ajouter une règle
-            AddRule();
             // Reset le temps depuis la dernière règle
             timeSinceLastRule = 0.0f;
+            // Ajouter une règle
+            AddRule();
         }
     }
 
     // Fonction pour ajouter une règle
     public void AddRule()
     {
-        Debug.Log("Adding rule");
         GameManager.Instance.AddRule();
         int table_index = GameManager.Instance.rules.Count - 2;
         tables[table_index].SetActive(true);

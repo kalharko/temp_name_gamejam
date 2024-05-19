@@ -124,7 +124,6 @@ public class GameManager : MonoBehaviour
     {
         rules = new List<List<List<string>>>();
         AddFirstRule();
-        AddRule();
 
         // Init game data;
         Health = initialHealth;
