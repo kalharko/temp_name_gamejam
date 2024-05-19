@@ -13,6 +13,9 @@ public class DragDrop : MonoBehaviour
     private Vector3 _position;
     private Transform _anchorPoint;
 
+    //audio variables
+    [SerializeField] public AudioSource pickUpAudioSource;
+    [SerializeField] public AudioSource dropAudioSource;
 
     void Start()
     {
@@ -31,6 +34,8 @@ public class DragDrop : MonoBehaviour
     public void OnMouseDown() {
         _dragOffset = transform.position - GetMousePosition();
         GameManager.Instance.DraggedSushi = gameObject;
+
+        pickUpAudioSource.Play(); //play the pick up sound
     }
 
     public void OnMouseDrag() {
@@ -40,6 +45,10 @@ public class DragDrop : MonoBehaviour
 
     public void OnMouseUp()
     {
+        dropAudioSource.time = 0; //reset the sound to the beginning
+        dropAudioSource.Play(); //play the drop sound
+        StartCoroutine(StopAudioAfterDelay(dropAudioSource, 1f)); 
+        
         if (!GameManager.Instance.IsSushiValid)
         {
             GameManager.Instance.UpdateGameState(GameState.HasFailed);
@@ -76,6 +85,12 @@ public class DragDrop : MonoBehaviour
         }
         transform.position = _anchorPoint.position;
         yield return null;
+    }
+
+    private IEnumerator StopAudioAfterDelay(AudioSource audioSource, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        audioSource.Stop();
     }
 
 }
