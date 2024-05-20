@@ -74,7 +74,7 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 418470f63b86e4f428fabe64d493aa74, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2680657d582478344ad536e17553bfc8, type: 3}
   m_MaskAlphaCutoff: 0.473
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
@@ -143,7 +143,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.00000023841858, y: 0, z: -0.44}
-  m_LocalScale: {x: 3.04, y: 3.04, z: 3.04}
+  m_LocalScale: {x: 33.76, y: 33.76, z: 33.76}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3592318507215302284}
@@ -614,7 +614,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.00000023841858, y: 0, z: -0.44}
-  m_LocalScale: {x: 3.04, y: 3.04, z: 3.04}
+  m_LocalScale: {x: 16.5, y: 16.5, z: 16.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4204164707391239045}
@@ -874,7 +874,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.00000023841858, y: 0, z: -0.44}
-  m_LocalScale: {x: 3.04, y: 3.04, z: 3.04}
+  m_LocalScale: {x: 28.97, y: 28.97, z: 28.97}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1268543800248037322}
@@ -958,7 +958,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.00000023841858, y: 0, z: -0.44}
-  m_LocalScale: {x: 3.04, y: 3.04, z: 3.04}
+  m_LocalScale: {x: 23.06, y: 23.06, z: 23.06}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5565135085851525039}
@@ -1139,6 +1139,10 @@ MonoBehaviour:
   angryAudioClip: {fileID: 8300000, guid: cf8bb20e2ee9647e6be0c8df03cd5cfa, type: 3}
   happyAudioSource: {fileID: 2135669809293095721}
   happyAudioClip: {fileID: 8300000, guid: 932e6db45946f41ed9899b77dac457de, type: 3}
+  spriteRenderer: {fileID: 0}
+  spriteHappy: {fileID: 21300000, guid: 936095b79f82c274aaf328e8b12451e3, type: 3}
+  spriteAngry: {fileID: 21300000, guid: 2680657d582478344ad536e17553bfc8, type: 3}
+  spriteNormal: {fileID: 21300000, guid: 418470f63b86e4f428fabe64d493aa74, type: 3}
 --- !u!1 &3396889773541907532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,7 +1250,7 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 534ca40337df23f45b2cd27664ae0cd9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 22041262055c4a14a8467192105e19fa, type: 3}
   m_MaskAlphaCutoff: 0.473
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
@@ -1557,6 +1561,10 @@ MonoBehaviour:
   angryAudioClip: {fileID: 8300000, guid: cf8bb20e2ee9647e6be0c8df03cd5cfa, type: 3}
   happyAudioSource: {fileID: 2135669809293095721}
   happyAudioClip: {fileID: 8300000, guid: 932e6db45946f41ed9899b77dac457de, type: 3}
+  spriteRenderer: {fileID: 0}
+  spriteHappy: {fileID: 21300000, guid: 4f469ee267c993649829b01ad23ed96b, type: 3}
+  spriteAngry: {fileID: 21300000, guid: 22041262055c4a14a8467192105e19fa, type: 3}
+  spriteNormal: {fileID: 21300000, guid: 534ca40337df23f45b2cd27664ae0cd9, type: 3}
 --- !u!1 &4344036219910081300
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,6 +1689,10 @@ MonoBehaviour:
   angryAudioClip: {fileID: 8300000, guid: cf8bb20e2ee9647e6be0c8df03cd5cfa, type: 3}
   happyAudioSource: {fileID: 2135669809293095721}
   happyAudioClip: {fileID: 8300000, guid: 932e6db45946f41ed9899b77dac457de, type: 3}
+  spriteRenderer: {fileID: 1448790150840366294}
+  spriteHappy: {fileID: 21300000, guid: 8efb190b468c8fb439e8d1fbafbf0525, type: 3}
+  spriteAngry: {fileID: 21300000, guid: 5d4af0c5a9464c74a8e632fd2895dca1, type: 3}
+  spriteNormal: {fileID: 21300000, guid: 554d872218a88a945ad0bcdf071f0c05, type: 3}
 --- !u!1 &4817028556911508781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,7 +1943,7 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8162d1d30728f534b89dfbafd1c4372b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49adee1039c23e246b5b1b8d942ec1b8, type: 3}
   m_MaskAlphaCutoff: 0.473
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
@@ -2012,7 +2024,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cf8bb20e2ee9647e6be0c8df03cd5cfa, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.44
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2170,7 +2182,7 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 554d872218a88a945ad0bcdf071f0c05, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5d4af0c5a9464c74a8e632fd2895dca1, type: 3}
   m_MaskAlphaCutoff: 0.473
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
@@ -2254,7 +2266,7 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2da13d1abc0bb51408ddec9f1f5a9657, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5e9123e31df7f304791b5e359bb5613a, type: 3}
   m_MaskAlphaCutoff: 0.473
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
@@ -2388,6 +2400,10 @@ MonoBehaviour:
   angryAudioClip: {fileID: 8300000, guid: cf8bb20e2ee9647e6be0c8df03cd5cfa, type: 3}
   happyAudioSource: {fileID: 2135669809293095721}
   happyAudioClip: {fileID: 8300000, guid: 932e6db45946f41ed9899b77dac457de, type: 3}
+  spriteRenderer: {fileID: 2219287569135284325}
+  spriteHappy: {fileID: 21300000, guid: 9110258a9234a8441bde6a54bb9ddb2c, type: 3}
+  spriteAngry: {fileID: 21300000, guid: 49adee1039c23e246b5b1b8d942ec1b8, type: 3}
+  spriteNormal: {fileID: 21300000, guid: 53dac808250a8994a8a2e571d21c316d, type: 3}
 --- !u!1 &8087637862605485656
 GameObject:
   m_ObjectHideFlags: 0
@@ -2512,6 +2528,10 @@ MonoBehaviour:
   angryAudioClip: {fileID: 8300000, guid: cf8bb20e2ee9647e6be0c8df03cd5cfa, type: 3}
   happyAudioSource: {fileID: 2135669809293095721}
   happyAudioClip: {fileID: 8300000, guid: 932e6db45946f41ed9899b77dac457de, type: 3}
+  spriteRenderer: {fileID: 3870991222040960344}
+  spriteHappy: {fileID: 21300000, guid: e8faddc6df0313e4e85c8beabd743c79, type: 3}
+  spriteAngry: {fileID: 21300000, guid: 5e9123e31df7f304791b5e359bb5613a, type: 3}
+  spriteNormal: {fileID: 21300000, guid: 2da13d1abc0bb51408ddec9f1f5a9657, type: 3}
 --- !u!1 &8244510832227498040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2620,7 +2640,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 932e6db45946f41ed9899b77dac457de, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.429
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2731,7 +2751,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.00000023841858, y: 0, z: -0.44}
-  m_LocalScale: {x: 3.04, y: 3.04, z: 3.04}
+  m_LocalScale: {x: 18.86, y: 18.86, z: 18.86}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8862395536828421346}
