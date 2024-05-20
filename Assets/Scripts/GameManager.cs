@@ -30,6 +30,11 @@ public class GameManager : MonoBehaviour
     public bool IsSushiValid { get; set; }
     public int Health { get; set; }
 
+    //audio sources
+
+    public AudioSource loseLifeAudioSource;
+    public AudioClip loseLifeAudioClip;
+
     public int Score
     {
         get => score;
@@ -263,6 +268,8 @@ public class GameManager : MonoBehaviour
 
     public void RemoveLifePoints(int value)
     {
+    
+        loseLifeAudioSource.PlayOneShot(loseLifeAudioClip);
         Health -= value;
 
         if (Health <= 0)

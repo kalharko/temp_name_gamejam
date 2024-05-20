@@ -34,6 +34,9 @@ public class PopUpBehavior : MonoBehaviour
     // Flavor text options
     [SerializeField] private List<string> flavorTextOptions;
 
+    public AudioSource popUpAudioSource;
+    public AudioClip popUpAudioClip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +65,9 @@ public class PopUpBehavior : MonoBehaviour
 
     public void OpenPopUp(int table_index)
     {
+        popUpAudioSource.time = 0;
+        popUpAudioSource.PlayOneShot(popUpAudioClip);
+        
         background.SetActive(true);
         popUpScreen.SetActive(true);
         arrows[table_index].SetActive(true);
