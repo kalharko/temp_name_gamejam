@@ -14,13 +14,13 @@ public class PopUpBehavior : MonoBehaviour
     [SerializeField] private List<GameObject> arrows;
 
     // title
-    [SerializeField] private TMP_Text title;
+    [SerializeField] private TextMeshProUGUI title;
 
     // description
-    [SerializeField] private TMP_Text description;
+    [SerializeField] private TextMeshProUGUI description;
 
     // flavor text
-    [SerializeField] private TMP_Text flavorText;
+    [SerializeField] private TextMeshProUGUI flavorText;
 
     // PopUp Screen
     [SerializeField] private GameObject popUpScreen;
@@ -87,7 +87,7 @@ public class PopUpBehavior : MonoBehaviour
         descriptionText = descriptionText.Substring(0, descriptionText.Length - 4);
         descriptionText += ", please <3";
         description.transform.gameObject.SetActive(true);
-        description.GetComponent<Text>().text = descriptionText;
+        description.text = descriptionText;
 
         // set rules images
         ruleImage.SetRuleImage(rule);
@@ -99,9 +99,9 @@ public class PopUpBehavior : MonoBehaviour
     public void ClosePopUp()
     {
         popUpScreen.SetActive(false);
-        title.SetActive(false);
-        description.GetComponent<Text>().text = "";
-        flavorText.GetComponent<Text>().text = "";
+        title.text = "";
+        description.text = "";
+        flavorText.text = "";
         ruleImage.EraseRuleImage();
         foreach (GameObject arrow in arrows)
         {
