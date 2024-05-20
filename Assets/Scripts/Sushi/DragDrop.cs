@@ -68,9 +68,23 @@ public class DragDrop : MonoBehaviour
         dropAudioSource.time = 0;
         dropAudioSource.PlayOneShot(dropAudioClip);
         StartCoroutine(StopAudioAfterDelay(dropAudioSource, 1f));
+        StartCoroutine(ScaleDown());
         
         // _anchorPoint.position = transform.position;
         _anchorPoint.GetComponent<SushiBehavior>().StopFollowingSpline();
+    }
+
+    // Coroutine to scale the sushi object to smaller size
+    private IEnumerator ScaleDown()
+    {
+        float scale = 1;
+        while (scale > 0.5f)
+        {
+            scale = Mathf.MoveTowards(scale, 0, 0.1f);
+            transform.localScale = new Vector3(scale, scale, scale);
+            yield return new WaitForSeconds(0.0005f);
+        }
+        yield return null;
     }
 
    public void OnZoneCollided()
