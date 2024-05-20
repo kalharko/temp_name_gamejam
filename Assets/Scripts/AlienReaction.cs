@@ -7,6 +7,12 @@ public class AngryAlien : MonoBehaviour
     private static readonly int HasFailed = Animator.StringToHash("HasFailed");
     private static readonly int HasSucceeded = Animator.StringToHash("HasSucceeded");
 
+    //audio sources
+    public AudioSource angryAudioSource;
+    public AudioClip angryAudioClip;
+    public AudioSource happyAudioSource;
+    public AudioClip happyAudioClip;
+
     private void Awake()
     {
         GameManager.OnGameStateChanged += OnGameStateChanged;
@@ -23,10 +29,16 @@ public class AngryAlien : MonoBehaviour
         if (state == GameState.HasFailed)
         {
             animator.SetTrigger(HasFailed);
+            angryAudioSource.time = 0;
+            angryAudioSource.PlayOneShot(angryAudioClip);
+            
         } 
         else if (state == GameState.HasSucceeded)
         {
             animator.SetTrigger(HasSucceeded);
+            happyAudioSource.time = 0;
+            happyAudioSource.PlayOneShot(happyAudioClip);
+            
         }
     }
 }

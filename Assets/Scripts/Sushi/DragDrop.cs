@@ -10,9 +10,12 @@ public class DragDrop : MonoBehaviour
     [SerializeField] private float _returnSpeed = 10;
     private Camera _camera;
 
-    private Vector3 _position;
     private Transform _anchorPoint;
 
+    public AudioSource pickUpAudioSource;
+    public AudioClip pickUpAudioClip;
+    public AudioSource dropAudioSource;
+    public AudioClip dropAudioClip;
 
     void Start()
     {
@@ -29,6 +32,11 @@ public class DragDrop : MonoBehaviour
         return mousePosition;
     }
     public void OnMouseDown() {
+
+        pickUpAudioSource.time = 0;
+        pickUpAudioSource.PlayOneShot(pickUpAudioClip);
+        StartCoroutine(StopAudioAfterDelay(pickUpAudioSource, 1f));
+
         _dragOffset = transform.position - GetMousePosition();
         
         // Store the dragged sushi instance
@@ -42,6 +50,8 @@ public class DragDrop : MonoBehaviour
 
     public void OnMouseUp()
     {
+
+
         if (!GameManager.Instance.IsSushiValid)
         {
             GameManager.Instance.UpdateGameState(GameState.HasFailed);
@@ -55,6 +65,10 @@ public class DragDrop : MonoBehaviour
 
     private void StopMovingSushi()
     {
+        dropAudioSource.time = 0;
+        dropAudioSource.PlayOneShot(dropAudioClip);
+        StartCoroutine(StopAudioAfterDelay(dropAudioSource, 1f));
+        
         // _anchorPoint.position = transform.position;
         _anchorPoint.GetComponent<SushiBehavior>().StopFollowingSpline();
     }
@@ -78,6 +92,12 @@ public class DragDrop : MonoBehaviour
         }
         transform.position = _anchorPoint.position;
         yield return null;
+    }
+
+    private IEnumerator StopAudioAfterDelay(AudioSource audioSource, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        audioSource.Stop();
     }
 
 }
