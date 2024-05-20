@@ -233,6 +233,8 @@ public class GameManager : MonoBehaviour
     {
         List<List<string>> rule = rules[rule_index];
 
+        Debug.Log("Checking sushi" + sushi[0] + " " + sushi[1] + " " + sushi[2] + " against rule " + rule_index);
+
         // if the sushi is valid for newer rules, cant be valid for this rule
         if (rule_index + 1 < rules.Count)
         {
