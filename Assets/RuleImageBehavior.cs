@@ -61,7 +61,7 @@ public class RuleImageBehavior : MonoBehaviour
         float y = top_y[line_count - 1];
 
         // for each line in the rule
-        for (int line = 0; line < rule.Count; line++)
+        for (int line = rule.Count - 1; line >= 0; line--)
         {
             // if the line is empty skip
             if (rule[line].Count == 0) continue;
@@ -78,6 +78,8 @@ public class RuleImageBehavior : MonoBehaviour
                 // spawn the element
                 GameObject new_image = Instantiate(imagePrefab, transform);
                 new_image.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
+                new_image.GetComponent<RectTransform>().localScale = new Vector3(scales[line_count - 1], scales[line_count - 1], scales[line_count - 1]);
+                // new_image.GetComponent<RectTransform>().localScale = new Vector3(.6f, .6f, .6f);
                 Debug.Log("searching for" + rule[line][i]);
                 new_image.GetComponent<Image>().sprite = assets.Find(sprite => sprite.name == rule[line][i]);
                 x += x_offset[element_count - 1];
@@ -95,7 +97,7 @@ public class RuleImageBehavior : MonoBehaviour
             y -= y_offset[line_count - 1];
 
             // if not the last line
-            if (line + 1 < rule.Count && rule[line + 1].Count > 0)
+            if ((line - 1 >= 0 && rule[line - 1].Count > 0) || (line - 2 >= 0 && rule[line - 2].Count > 0))
             {
                 // spawn the "et" prefab
                 GameObject new_and = Instantiate(andPrefab, transform);

@@ -75,6 +75,8 @@ public class PopUpBehavior : MonoBehaviour
         string descriptionText = "Un sushi avec ";
         foreach (List<string> rule_part in rule)
         {
+            if (rule_part.Count == 0) continue;
+            
             for (int i = 0; i < rule_part.Count; i++)
             {
                 descriptionText += rule_part[i] + " ou ";
