@@ -4,25 +4,32 @@ using UnityEngine;
 
 public class Sushi : MonoBehaviour
 {
-
     public float speed;
-    public float stop;
-    
-    // Start is called before the first frame update
+    public float minX;
+    public float maxX;
+
+    public float maxY;
+    private Vector3 targetPosition;
+
     void Start()
     {
-        
+        // Set a random initial position within the bounds
+        transform.position = new Vector3(Random.Range(minX, maxX),transform.position.y, transform.position.z);
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(transform.position.x, transform.position.y + 1 *speed * Time.deltaTime, 0);
-        if (transform.position.y > stop)
+        Debug.Log("affiche le résultat");
+        // Move towards the target position
+         transform.position = new Vector3(transform.position.x,transform.position.y -1 * Time.deltaTime * speed, transform.position.z);
+
+        // If the object has reached the target position, set a new random target position
+        if (transform.position.y < maxY)
         {
-            transform.position = new Vector3(transform.position.x, -stop, transform.position.z);
+
+             transform.position = new Vector3(Random.Range(minX, maxX), - maxY, transform.position.z);
+            //targetPosition = new Vector3(transform.position.x, Random.Range(minY, maxY), transform.position.z);
         }
     }
-
 }
-
