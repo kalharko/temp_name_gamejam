@@ -7,6 +7,7 @@ public class TableBehavior : MonoBehaviour
 
     // tables
     [SerializeField] private List<GameObject> tables;
+    [SerializeField] private List<GameObject> dropZones;
 
     // Popup reference
     [SerializeField] private PopUpBehavior popup;
@@ -24,6 +25,12 @@ public class TableBehavior : MonoBehaviour
         foreach (GameObject table in tables)
         {
             table.SetActive(false);
+        }
+
+        // Hide all drop zones
+        foreach (GameObject dropZone in dropZones)
+        {
+            dropZone.SetActive(false);
         }
     }
 
@@ -48,6 +55,7 @@ public class TableBehavior : MonoBehaviour
         GameManager.Instance.AddRule();
         int table_index = GameManager.Instance.rules.Count - 2;
         tables[table_index].SetActive(true);
+        dropZones[table_index].SetActive(true);
         popup.OpenPopUp(table_index);
     }
 

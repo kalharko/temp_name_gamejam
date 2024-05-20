@@ -253,6 +253,19 @@ public class GameManager : MonoBehaviour
 
     public bool CheckSushiAgainstRule(List<string> sushi, int rule_index)
     {
+        // case of check agains trash rule
+        if (rule_index == 0)
+        {
+            for (int i = 1; i < rules.Count; i++)
+            {
+                if (CheckSushiAgainstRule(sushi, i))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         List<List<string>> rule = rules[rule_index];
 
         Debug.Log("Checking sushi" + sushi[0] + " " + sushi[1] + " " + sushi[2] + " against rule " + rule_index);
