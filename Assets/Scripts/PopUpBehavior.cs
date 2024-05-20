@@ -55,19 +55,22 @@ public class PopUpBehavior : MonoBehaviour
         {
             zone.SetActive(false);
         }
+
+        // stop time
+        // StartCoroutine(StopTime());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OpenPopUp(int table_index)
     {
         popUpAudioSource.time = 0;
         popUpAudioSource.PlayOneShot(popUpAudioClip);
-        
+
         background.SetActive(true);
         popUpScreen.SetActive(true);
         arrows[table_index].SetActive(true);
@@ -84,7 +87,7 @@ public class PopUpBehavior : MonoBehaviour
         foreach (List<string> rule_part in rule)
         {
             if (rule_part.Count == 0) continue;
-            
+
             for (int i = 0; i < rule_part.Count; i++)
             {
                 descriptionText += rule_part[i] + " ou ";
@@ -121,11 +124,16 @@ public class PopUpBehavior : MonoBehaviour
         {
             zone.SetActive(false);
         }
-        
+
         background.SetActive(false);
 
         // Resume time
         StartCoroutine(ResumeTime());
+    }
+
+    public void StartTimeFunction()
+    {
+        StartCoroutine(StopTime());
     }
 
     // Coroutine pour animer la reprise du temps
@@ -133,19 +141,19 @@ public class PopUpBehavior : MonoBehaviour
     {
         while (Time.timeScale + 0.05 < 1.0f)
         {
-            Time.timeScale = Mathf.Lerp(Time.timeScale, 1.0f, 0.1f);
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 1.0f, 0.2f);
             // Wait 0.01 second
             yield return new WaitForSeconds(0.041f);
         }
         Time.timeScale = 1.0f;
     }
-    
+
     // Coroutine pour animer l'arrêt du temps
     public IEnumerator StopTime()
     {
         while (Time.timeScale - 0.05 > 0.0f)
         {
-            Time.timeScale = Mathf.Lerp(Time.timeScale, 0.0f, 0.1f);
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 0.0f, 0.2f);
             // Wait 0.01 second
             yield return new WaitForSeconds(0.041f);
         }
