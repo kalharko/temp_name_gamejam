@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     // Paramètres du jeu
     // Nombre de points de vie initial
     [SerializeField] private int initialHealth = 3;
-    [SerializeField] float slowdownDuration = 2f;
+    [SerializeField] private float slowdownDuration = 2f;
+    [SerializeField] private GameObject newRulePopup;
 
     // Référence aux assets du sushi
     [SerializeField] public List<Sprite> sprite_plates;
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     // Variables du jeu
     // Nombre de points de vie actuel
     private int health;
-    private List<List<List<string>>> rules;
+    public List<List<List<string>>> rules;
 
     private int score;
 
@@ -70,6 +71,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameOverState()
     {
+        newRulePopup.SetActive(false);
         StartCoroutine(SlowTimeUntilGameOver());
     }
 
@@ -122,7 +124,6 @@ public class GameManager : MonoBehaviour
     {
         rules = new List<List<List<string>>>();
         AddFirstRule();
-        AddRule();
 
         // Init game data;
         Health = initialHealth;
