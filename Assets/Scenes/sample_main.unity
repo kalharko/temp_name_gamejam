@@ -217,6 +217,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: af67b03a7d2ec6045b962d3757ad6172, type: 3}
   - {fileID: 21300000, guid: c4da9f3de161be34b9279c085c72dc2f, type: 3}
   - {fileID: 21300000, guid: 08023a6feb33b6f479fc8b7cb9e80848, type: 3}
+  lifeImages:
+  - {fileID: 1701540991}
+  - {fileID: 2094958801}
+  - {fileID: 1354514689}
+  lostLifeSprite: {fileID: 21300000, guid: e211a915e657deb4da6309dcfb701864, type: 3}
   loseLifeAudioSource: {fileID: 125004625}
   loseLifeAudioClip: {fileID: 8300000, guid: 0e0c1cc704d074d60831487c5e1e0e67, type: 3}
   state: 0
@@ -1469,7 +1474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9112781423524282956, guid: 18010b7bf62f9054fa16357a60f12c41, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 275
+      value: 236.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1506,6 +1511,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1354514689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7084823869306062438, guid: 18010b7bf62f9054fa16357a60f12c41, type: 3}
+  m_PrefabInstance: {fileID: 1274510069}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1540968238

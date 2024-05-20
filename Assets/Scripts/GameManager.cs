@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class GameManager : MonoBehaviour
     // Nombre de points de vie actuel
     private int health;
     public List<List<List<string>>> rules;
+
+    [SerializeField] private Image[] lifeImages;
+    [SerializeField] private Sprite lostLifeSprite;
 
     private int score;
 
@@ -141,6 +145,24 @@ public class GameManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    private void UpdateLifeUI()
+    {
+        int livesRemaining = Health;
+        for (int i = 0; i < lifeImages.Length; i++)
+        {
+            if (i < livesRemaining)
+            {
+                
+                lifeImages[i].sprite = lifeImages[i].GetComponent<Image>().sprite;
+            }
+            else
+            {
+                
+                lifeImages[i].sprite = lostLifeSprite;
+            }
+        }
     }
 
     public void AddFirstRule()
@@ -273,6 +295,7 @@ public class GameManager : MonoBehaviour
     
         loseLifeAudioSource.PlayOneShot(loseLifeAudioClip);
         Health -= value;
+        UpdateLifeUI();
 
         if (Health <= 0)
         {
