@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -5,6 +6,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; set; }
 
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private TextMeshProUGUI scoreText;
     
     private void Awake()
     {
@@ -26,6 +28,14 @@ public class UIManager : MonoBehaviour
 
     private void OnGameStateChanged(GameState state)
     {
-        gameOverScreen.SetActive(state == GameState.IsGameOver);
+        if (state == GameState.IsGameOver)
+        {
+            scoreText.text = "SCORE : " + GameManager.Instance.Score;
+            gameOverScreen.SetActive(true);
+        }
+        else
+        {
+            gameOverScreen.SetActive(false);
+        }
     }
 }
