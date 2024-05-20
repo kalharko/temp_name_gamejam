@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     // Paramètres du jeu
     // Nombre de points de vie initial
     [SerializeField] private int initialHealth = 3;
-    [SerializeField] float slowdownDuration = 2f;
-    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private float slowdownDuration = 2f;
+    [SerializeField] private GameObject newRulePopup;
 
     // Référence aux assets du sushi
     [SerializeField] public List<Sprite> sprite_plates;
@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
     public bool IsSushiInRange { get; set; }
     public bool IsSushiValid { get; set; }
     public int Health { get; set; }
+
+    //audio sources
+
+    public AudioSource loseLifeAudioSource;
+    public AudioClip loseLifeAudioClip;
 
     public int Score
     {
@@ -71,6 +76,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameOverState()
     {
+        newRulePopup.SetActive(false);
         StartCoroutine(SlowTimeUntilGameOver());
     }
 
@@ -89,7 +95,6 @@ public class GameManager : MonoBehaviour
         }
 
         Time.timeScale = 0;
-        gameOverScreen.SetActive(true);
     }
 
     private void HandleSucceededState()
@@ -251,6 +256,11 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void IncrementScore(int value)
     {
         Score += value;
@@ -258,6 +268,8 @@ public class GameManager : MonoBehaviour
 
     public void RemoveLifePoints(int value)
     {
+    
+        loseLifeAudioSource.PlayOneShot(loseLifeAudioClip);
         Health -= value;
 
         if (Health <= 0)
