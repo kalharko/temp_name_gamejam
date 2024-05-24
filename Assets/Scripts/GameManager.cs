@@ -53,13 +53,13 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameState> OnGameStateChanged;
     public GameState state;
-    
+
     public static GameManager Instance { get; private set; }
 
     public void UpdateGameState(GameState newState)
     {
         state = newState;
-        
+
         switch (newState)
         {
             case GameState.IsPlaying:
@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
                 HandleGameOverState();
                 break;
         }
-        
+
         OnGameStateChanged?.Invoke(state);
     }
 
@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         // Hide plate content and increment score
         DraggedSushi.GetComponentInParent<SushiBehavior>().HidePlateContent();
         Score++;
-        
+
         // Reset dragged sushi data
         IsSushiInRange = false;
         IsSushiValid = false;
@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleFailedState()
     {
-        
+
     }
 
     private void Awake()
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
         // Init game data;
         Health = initialHealth;
         Score = 0;
-        
+
         UpdateGameState(GameState.IsPlaying);
     }
 
@@ -154,12 +154,12 @@ public class GameManager : MonoBehaviour
         {
             if (i < livesRemaining)
             {
-                
+
                 lifeImages[i].sprite = lifeImages[i].GetComponent<Image>().sprite;
             }
             else
             {
-                
+
                 lifeImages[i].sprite = lostLifeSprite;
             }
         }
@@ -167,20 +167,21 @@ public class GameManager : MonoBehaviour
 
     public void AddFirstRule()
     {
-        List<List<string>> new_rule = new List<List<string>> { new() {}, new() { }, new() { } };
+        List<List<string>> new_rule = new List<List<string>> { new() { }, new() { }, new() { } };
         int random_index;
         // Add random plate
         new_rule[0].Add(sprite_plates[Random.Range(0, sprite_plates.Count)].name);
         // Add 2 random fillings
         random_index = Random.Range(0, sprite_fillings.Count);
         new_rule[1].Add(sprite_fillings[random_index].name);
-        while (sprite_fillings[random_index].name == new_rule[1][0]) {
+        while (sprite_fillings[random_index].name == new_rule[1][0])
+        {
             random_index = Random.Range(0, sprite_fillings.Count);
         }
         new_rule[1].Add(sprite_fillings[random_index].name);
         // Add 1 random topping
         new_rule[2].Add(sprite_toppings[Random.Range(0, sprite_toppings.Count)].name);
-        
+
         rules.Add(new_rule);
     }
 
@@ -220,8 +221,10 @@ public class GameManager : MonoBehaviour
         List<List<string>> new_rule = new List<List<string>> { new() { }, new() { }, new() { } };
 
         string randomDraw;
-        
-        for (int i = 0; i <= index_of_new_rule; i++)
+        int sanity_stop;
+        int big_sanity_stop = 0;
+
+        while (new_rule[0].Count + new_rule[1].Count + new_rule[2].Count < index_of_new_rule && big_sanity_stop < index_of_new_rule * 2)
         {
             // get a random number between 0 and 1
             float random_number = Random.Range(0f, 1f);
@@ -229,25 +232,49 @@ public class GameManager : MonoBehaviour
             {
                 // add a constraint to the first list
                 randomDraw = sprite_plates[Random.Range(0, sprite_plates.Count)].name;
-                new_rule[0].Add(randomDraw);
-                
+                sanity_stop = 0;
+                while ((new_rule[0].Contains(randomDraw) || used_plates.Contains(randomDraw)) && sanity_stop < 5)
+                {
+                    randomDraw = sprite_plates[Random.Range(0, sprite_plates.Count)].name;
+                    sanity_stop++;
+                }
+                if (new_rule[0].Contains(randomDraw) == false) {
+                    new_rule[0].Add(randomDraw);
+                }
             }
             else if (random_number < 0.66)
             {
                 // add a constraint to the second list
                 randomDraw = sprite_fillings[Random.Range(0, sprite_fillings.Count)].name;
-                new_rule[1].Add(randomDraw);
+                sanity_stop = 0;
+                while ((new_rule[1].Contains(randomDraw) || used_fillings.Contains(randomDraw)) && sanity_stop < 5)
+                {
+                    randomDraw = sprite_fillings[Random.Range(0, sprite_fillings.Count)].name;
+                    sanity_stop++;
+                }
+                if (new_rule[1].Contains(randomDraw) == false) {
+                    new_rule[1].Add(randomDraw);
+                }
             }
             else
             {
                 // add a constraint to the third list
                 randomDraw = sprite_toppings[Random.Range(0, sprite_toppings.Count)].name;
-                new_rule[2].Add(randomDraw);
+                sanity_stop = 0;
+                while ((new_rule[2].Contains(randomDraw) || used_toppings.Contains(randomDraw)) && sanity_stop < 5)
+                {
+                    randomDraw = sprite_toppings[Random.Range(0, sprite_toppings.Count)].name;
+                    sanity_stop++;
+                }
+                if (new_rule[2].Contains(randomDraw) == false) {
+                    new_rule[2].Add(randomDraw);
+                }
             }
-            
+
             Debug.Log(randomDraw);
+            big_sanity_stop++;
         }
-        
+
         rules.Add(new_rule);
     }
 
@@ -305,7 +332,7 @@ public class GameManager : MonoBehaviour
 
     public void RemoveLifePoints(int value)
     {
-    
+
         loseLifeAudioSource.PlayOneShot(loseLifeAudioClip);
         Health -= value;
         UpdateLifeUI();
@@ -326,14 +353,14 @@ public class GameManager : MonoBehaviour
         // TODO : Implementer
         return "";
     }
-    
+
     public List<List<List<string>>> GetRules()
     {
         return rules;
     }
 
     // TODO : Fonction qui retourne les images associées à une règle
-    
+
 }
 public enum GameState
 {
